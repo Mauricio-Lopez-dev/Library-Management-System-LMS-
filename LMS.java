@@ -6,109 +6,89 @@
  *             all current books in the system.
  */
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.*;
 import java.util.*;
 
 public class LMS
 {
+    // Global Variable
+    static Scanner in = new Scanner(System.in);
+
     public static void main(String[] args)
     {
-        // Variables and Paths
-        int userChoice = 0;
-        Path path = Paths.get("../LibraryManagementSystem/ListOfBooks.txt");
-        List<String> data = new ArrayList<>();
-        Scanner in = new Scanner(System.in);
-        boolean badInput = true;
+        // Variable and Objects
+        FileHandler fileHandler = new FileHandler();
+        int choice = 0;
 
-        // Welcoming Message
+        do
+        {
+            choice = getOption();
+            switch(choice)
+            {
+                case 1: // Add books
+                    AppendBookList appendList = new AppendBookList(); // Continue here - validate the the ID
+                    break;
+
+                case 2: //Remove books
+                    RemoveBook removeBook = new RemoveBook();
+                    break;
+
+                case 3: // Display all books
+                    fileHandler.readFile();
+                    System.out.println(fileHandler.toString());
+                    break;
+
+                case 4: // Exit system
+                    System.out.print("Thank you for using LMS! Have a good day.\n");
+                    break;
+
+                default: // Invalid selection
+                    System.out.println("Invalid selection, try again...");
+                    break;
+            }
+        }while(choice != 4); // end switch
+    } // end main
+
+    public static int getOption()
+    {
+        // Output - Welcoming Message
         System.out.println("\t\tWelcome to Library Management System");
         System.out.println(" **************************************************");
+
+        String option = "";
+
+        option += "[1] Add a book to the inventory\n";
+        option += "[2] Remove a book from the inventory\n";
+        option += "[3] Display all current books\n";
+        option += "[4] Exit system\n";
+
+        return getInput(option);
+    } // end geOption method
+
+    public static int getInput(String option)
+    {
+        int choice = 0;
+        boolean badInput = true;
 
         do
         {
             try
             {
-                System.out.println("Please select one of the following options:");
-                displayList();
-                userChoice = in.nextInt();
-                badInput = false;
-
+             System.out.print(option + "Enter your choice: ");
+             choice = in.nextInt();
+             badInput = false;
             }
             catch(InputMismatchException e)
             {
-                System.out.println("*Please select a valid option!*");
-                in.nextLine();
+                System.out.println("Error: Invaild input. Try again\n");
                 badInput = true;
+                in.nextLine();
             }
-
         }while(badInput);
+        return choice;
+    } // end getInput method
 
-        data = readFile(path.toString());
-
-
-    } // end Main
-
-    public static void displayList()
+    public static void displayMessage(String message)
     {
-        System.out.println("1. Add a book to the inventory");
-        System.out.println("2. Remove a book from the inventory");
-        System.out.println("3. Show all the books");
-        System.out.println("4. Exit");
-        System.out.print("Enter your choice: ");
-    } // end displayMenu method
-
-    public static List<String> readFile(String file)
-    {
-        List<String> data = new ArrayList<>();
-        Path path = Paths.get(file);
-
-        try
-        {
-            // Opens file
-            BufferedReader br = Files.newBufferedReader(path, Charset.defaultCharset());
-            String line = br.readLine();
-
-            System.out.println(" **************************************************");
-            System.out.println("Current books in the system");
-            while(line != null)
-            {
-                System.out.println(line);
-                data.add(line.toString());
-                line = br.readLine();
-
-            } // end while loop
-
-            // Close stream
-            br.close();
-        }
-        catch(IOException e)
-        {
-            System.out.println("Error: File not found");
-        } // end try catch
-        return data;
-    } // end readFile method
-
-    public static void systemOptions(int choice)
-    {
-        switch(choice)
-        {
-            case 1:
-                // Add Books
-               break;
-
-            case 2:
-                //Remove books
-                break;
-
-            case 3:
-                // Display list
-                break;
-        } // end switch
-
-    } // end systemFeatures method
-
-
-
+        System.out.println(message);
+    } // end displayMessage method
 } // end LMS class
