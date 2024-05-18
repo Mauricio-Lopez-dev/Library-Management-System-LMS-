@@ -1,3 +1,14 @@
+/*
+ * Author: Mauricio Lopez Alvarez
+ * Course: CEN 3024C
+ * Date Written: May 15, 2023
+ * Class: Software Development I
+ * Purpose:...FileHandler class handles the file created for the user. It will open, read, write, and replace
+ *            current text file associated with this software. The data captured from the text file is stored
+ *            in a ArrayList to provide a dynamic array. This creates a mutable array and has no constraints
+ *            of size from the text file.
+ */
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.*;
@@ -5,7 +16,7 @@ import java.util.*;
 
 public class FileHandler
 {
-    // Data Field
+    // Data fields
     private ArrayList<String> data;
     private Path path = Paths.get("../LibraryManagementSystem/ListOfBooks.txt");
 
@@ -24,27 +35,37 @@ public class FileHandler
         this.data = data;
     } // end mutator method
 
+    /*
+     * Method name: toString()
+     * Purpose:...This method will store all the current information from the variable data. Also, will allow
+     *            to display all current content from the file.
+     * Arguments: Zero arguements
+     * Return value: Returns value of type String.
+     */
     @Override
     public String toString()
     {
         String result = "";
-
         result += " **************************************************\n";
         result += "Current books in the system";
 
         for(String line: data)
         {
             result += "\n" + line;
-        }
-
+        } // end for loop
         return result;
     } // end toString method
 
+    /*
+     * Method name: ArrayList<String> readFile()
+     * Purpose:...This method will open and read the file provided from the path variable.
+     *            Its contents are then stored into the variable data to modify and/or view it's content.
+     * Arguments: Zero arguments
+     * Return value: The return value is data of type ArrayList<String>
+     */
     public ArrayList<String> readFile()
     {
-        // Variables and Path
-        ArrayList<String> data = new ArrayList<>();
-
+       data = new ArrayList<>();
 
         try
         {
@@ -70,6 +91,13 @@ public class FileHandler
         return data;
     } // end readFile method
 
+    /*
+     * Method name: writeFile()
+     * Purpose:...Provides function to enable a user to add book in the switch statement in the main().
+     *            The data is received by its argument.
+     * Arguments: StringBuilder newInfo
+     * Return value: None; no return value for this method.
+     */
     public void writeFile(StringBuilder newInfo)
     {
         // Variables
@@ -88,6 +116,14 @@ public class FileHandler
         } // end try catch
     } // end writeFIle method
 
+    /*
+     * Method name: removeBook()
+     * Purpose:...Provides function to enable a user to remove a book from the text file.
+     *            While it iterates through the old file it determines what line not insert
+     *            into the new file from the argument deleteLine.
+     * Arguments: String filepath, int deleteLine
+     * Return value: None: no return value for this method.
+     */
     public void removeBook(String filepath, int deleteLine)
     {
         String tempFile = "temp.txt";

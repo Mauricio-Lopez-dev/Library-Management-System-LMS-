@@ -1,5 +1,12 @@
-import java.io.File;
-import java.nio.file.*;
+/*
+ * Author: Mauricio Lopez Alvarez
+ * Course: CEN 3024C
+ * Date Written: May 15, 2023
+ * Class: Software Development I
+ * Purpose:...RemoveBook is a feature of the software. It enables a user to remove a book from the system
+ *            by providing an existing ID number.
+ */
+
 import java.util.*;
 
 public class RemoveBook extends FileHandler
@@ -22,6 +29,12 @@ public class RemoveBook extends FileHandler
         this.bookID = bookID;
     } // end mutator method
 
+    /*
+     * Method name: removeOption()
+     * Purpose:...Prompts the user to enter an existing ID number to remove the book from the system.
+     * Arguments: Zero arguments
+     * Return value: None; no return value for this method
+     */
     public void removeOption()
     {
         // Variables

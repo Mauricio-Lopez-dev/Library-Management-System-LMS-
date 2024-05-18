@@ -1,3 +1,12 @@
+/*
+ * Author: Mauricio Lopez Alvarez
+ * Course: CEN 3024C
+ * Date Written: May 15, 2023
+ * Class: Software Development I
+ * Purpose:...AppendBookList is a feature of the software. It enables a user to add books to the current text
+ *            file. This class is utilized in case 1 of the switch statement.
+ */
+
 import java.util.*;
 
 public class AppendBookList extends FileHandler
@@ -42,6 +51,12 @@ public class AppendBookList extends FileHandler
         this.author = author;
     } // end mutator method
 
+    /*
+     * Method name: appendBook()
+     * Purpose:...Prompts the user to enter the required data to add the book to the system.
+     * Arguments: Zero arguments
+     * Return value: None; no return value for this method
+     */
     public void appendBook()
     {
         // Variables
